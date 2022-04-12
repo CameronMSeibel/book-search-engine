@@ -19,7 +19,7 @@ module.exports = gql`
     }
 
     type Auth {
-        token: String
+        token: ID
         user: User
     }
 
