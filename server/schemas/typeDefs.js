@@ -18,6 +18,11 @@ module.exports = gql`
         savedBooks: [Book]
     }
 
+    type Auth {
+        token: String
+        user: User
+    }
+
     input BookInput {
         bookId: String
         title: String
