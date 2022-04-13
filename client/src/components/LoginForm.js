@@ -28,10 +28,8 @@ const LoginForm = () => {
       event.stopPropagation();
     }
     try {
-      console.log("About to do it!")
-      const data = await loginUser({variables: {...userFormData}});
-      console.log("data", data);
-      const { token, user } = data;
+      const { data } = await loginUser({variables: {...userFormData}});
+      const { token, user } = data.login;
       if (!data) {
         console.log("Bad!")
         throw new Error('something went wrong!');
