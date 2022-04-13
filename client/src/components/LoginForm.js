@@ -1,11 +1,14 @@
 // see SignupForm.js for comments
+import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
+import { LOGIN_USER } from '../utils/mutations';
 
 const LoginForm = () => {
+  const [loginUser] = useMutation(LOGIN_USER);
+
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -24,18 +27,20 @@ const LoginForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-
     try {
-      const response = await loginUser(userFormData);
-
-      if (!response.ok) {
+      console.log("About to do it!")
+      const data = await loginUser({variables: {...userFormData}});
+      console.log("data", data);
+      const { token, user } = data;
+      if (!data) {
+        console.log("Bad!")
         throw new Error('something went wrong!');
       }
 
-      const { token, user } = await response.json();
       console.log(user);
       Auth.login(token);
     } catch (err) {
+      console.log("Very bad!")
       console.error(err);
       setShowAlert(true);
     }
