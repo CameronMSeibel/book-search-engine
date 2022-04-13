@@ -32,12 +32,12 @@ module.exports = {
             const token = signToken(user);
             return {token, user};
         },
-        saveBook: async (parent, args, {user}) => {
+        saveBook: async (parent, {input}, {user}) => {
             if(user){
                 try{
                     const updatedUser = await User.findOneAndUpdate(
                         { _id: user._id },
-                        { $addToSet: { savedBooks: args } },
+                        { $addToSet: { savedBooks: input } },
                         { new: true, runValidators: true }
                     );
                     return updatedUser;
