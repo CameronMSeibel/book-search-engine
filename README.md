@@ -14,7 +14,7 @@ Book search engine is a tool designed to allow a user to keep track of a reading
 
 ## Installation
 
-You can visit the deployed webpage.
+You can [visit the deployed webpage](https://cmseibel-book-search.herokuapp.com/).
 
 ## Usage
 
